@@ -1,0 +1,79 @@
+VS code - Terminal
+
+pip install flask
+pip show flask
+
+---Create--
+
+mkdir flask_app
+cd flask_app
+
+code .
+
+3. app.py
+
+from flask import Flask
+
+# Create a Flask application
+app = Flask(__name__)
+
+# Define a route
+@app.route('/')
+def home():
+    return '<h1 style="color:blue; text-align:center;">🚀 Welcome to My First Flask App!</h1>'
+
+# Run the app
+if __name__ == '__main__':
+    app.run(debug=True)
+
+4. python app.py
+
+5. https.......
+
+--------------------
+
+
+app.py
+
+from flask import Flask, render_template_string
+
+app = Flask(__name__)
+
+HTML_PAGE = """
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Flask Demo</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #ff758c, #ff7eb3);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: white;
+      text-align: center;
+      padding-top: 100px;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 15px;
+      width: 50%;
+      margin: auto;
+      padding: 30px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>🚀 Welcome to My First Flask App!</h1>
+    <p>This app is built and running directly from VS Code.</p>
+  </div>
+</body>
+</html>
+"""
+
+@app.route('/')
+def home():
+    return render_template_string(HTML_PAGE)
+
+if __name__ == '__main__':
+    app.run(debug=True)

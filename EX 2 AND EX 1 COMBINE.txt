@@ -1,0 +1,86 @@
+EX 2 AND EX 1 COMBINE 
+
+🧱 Step 1: Create a New Project Folder
+
+Open PowerShell and run:
+
+mkdir git-essentials-lab
+cd git-essentials-lab
+
+🧩 Step 2: Create Your Webpage (index.html)
+
+index.html
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Simple Webpage</title>
+</head>
+<body>
+  <h1>Hello from my Webpage!</h1>
+  <p>This is a simple webpage created using HTML and GitHub.</p>
+</body>
+</html>
+
+
+
+That’s it — just a plain HTML file.
+
+🐳 (Optional) Step 3: Create a Dockerfile (if required for your exam)
+
+If your lab expects you to containerize the webpage, run:
+
+Dockerfile
+
+FROM nginx
+COPY index.html /usr/share/nginx/html/index.html
+
+
+
+If not required, you can skip this.
+
+🧰 Step 4: Initialize Git
+git init
+git config user.name "Your Name"
+git config user.email "you@example.com"
+
+🧾 Step 5: Create a README File
+echo "# Git Essentials Lab" > README.md
+
+
+Then:
+
+git add .
+git commit -m "Initial commit with simple HTML page"
+
+☁️ Step 6: Create a New GitHub Repository
+
+Go to 👉 https://github.com/new
+
+Name it git-essentials-lab
+
+Don’t tick “Initialize with README” (you already have one)
+
+Click Create Repository
+
+Then copy the HTTPS URL (example):
+
+https://github.com/<your-username>/git-essentials-lab.git
+
+🔗 Step 7: Connect and Push to GitHub
+
+In PowerShell:
+
+git branch -M main
+git remote add origin https://github.com/<your-username>/git-essentials-lab.git
+git push -u origin main
+
+
+✅ Done — your project (with one HTML file) is now on GitHub.
+
+(Optional) 🧪 Step 8: View Your Page Using Docker (if using Dockerfile)
+
+Run:
+
+docker build -t myweb:v1 .
+docker run -d -p 8080:80 myweb:v1

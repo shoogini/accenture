@@ -1,0 +1,69 @@
+:: =========================
+:: GIT ESSENTIALS – ONE SCRIPT
+:: Works in VS Code Terminal (PowerShell) and Windows CMD
+:: For macOS/Linux: the commands are the same; replace $vars with text if needed.
+:: =========================
+
+:: 0) VERIFY GIT + BASIC CONFIG (run once per machine)
+git --version
+git config --global user.name "kpneha4"
+git config --global user.email "kpneha4@gmail.com"
+git config --global init.defaultBranch main
+
+:: 1) START A NEW PROJECT LOCALLY
+mkdir git-essentials-lab
+cd git-essentials-lab
+git init
+
+:: 2) CREATE FILES
+echo # Git Essentials Lab > README.md
+echo bin/ > .gitignore
+
+:: 3) STAGE + COMMIT
+git add .
+git commit -m "Initial commit"
+
+:: 4) CONNECT TO GITHUB (set your username and repo name)
+:: Replace the values on the right side with your details.
+set GITHUB_USERNAME=kpneha4
+set REPO_NAME=git-essentials-lab
+
+:: 5) ADD REMOTE + PUSH MAIN (first push will prompt for GitHub login/token)
+git branch -M main
+git remote add origin https://github.com/kpneha4/git-essentials-lab.git
+git push -u origin main
+
+:: 6) CREATE A FEATURE BRANCH, EDIT FILE, COMMIT, PUSH
+git checkout -b feature/update-readme
+
+:: Append a small section to README.md (PowerShell/CMD-friendly)
+echo.>> README.md
+echo ## Objectives>> README.md
+echo - Learn Git basics>> README.md
+echo - Practice branching and merging>> README.md
+
+git add README.md
+git commit -m "Add Objectives section to README"
+git push -u origin feature/update-readme
+
+:: 7) MERGE THE FEATURE BRANCH BACK INTO MAIN (terminal-only merge)
+git checkout main
+git pull origin main
+git merge feature/update-readme
+git push origin main
+
+:: 8) CLEAN UP THE FEATURE BRANCH (optional)
+git push origin --delete feature/update-readme
+git branch -d feature/update-readme
+
+:: 9) BASIC INSPECTION (handy for viva/demo)
+git status
+git remote -v
+git branch -a
+git log --oneline --graph --decorate --all
+
+:: 10) PULL LATEST (shows you can sync)
+git pull origin main
+
+:: NOTE: Changing repo visibility (Public/Private) is done on GitHub UI:
+:: GitHub -> Your repo -> Settings -> Danger Zone -> Change repository visibility.

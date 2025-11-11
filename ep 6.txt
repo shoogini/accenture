@@ -1,0 +1,90 @@
+Step 1: Create the YAML file
+ file_name = nginx-pod.yaml
+
+paste this code inside this file 
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+  labels:
+    app: nginx
+spec:
+  containers:
+  - name: nginx
+    image: nginx:latest
+    ports:
+    - containerPort: 80
+
+
+
+run terminal 
+
+docker --version
+
+choco install kubernetes-cli -y
+kubectl version --client
+
+if ask  Do you want to continue?([Y]es/[N]o): give Y
+
+ choco install minikube -y
+ minikube start --driver=docker
+
+if ask  Do you want to continue?([Y]es/[N]o): give Y
+
+
+kubectl apply -f nginx-pod.yaml
+
+
+kubectl get pods
+
+
+kubectl describe pod nginx-pod
+
+
+kubectl port-forward pod/nginx-pod 3000:80
+open localhost:3000
+
+to close ctrl+c
+
+
+kubectl delete pod nginx-pod
+
+
+kubectl create deployment my-nginx --image=nginx
+
+
+
+kubectl get deployments
+kubectl get pods -l app=my-nginx
+
+
+
+
+kubectl scale deployment my-nginx --replicas=3
+kubectl get pods
+
+
+
+ kubectl set image deployment/my-nginx nginx=nginx:1.25
+ kubectl rollout status deployment/my-nginx
+
+
+
+kubectl expose deployment my-nginx --type=NodePort --port=80
+kubectl get svc
+
+
+minikube service my-nginx --url
+
+one url will come open that url 
+to close ctrl+c
+
+
+kubectl delete deployment my-nginx
+kubectl delete svc my-nginx
+kubectl delete all --all -n default
+
+
+minikube stop
+minikube delete

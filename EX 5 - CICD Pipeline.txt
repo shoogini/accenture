@@ -1,0 +1,115 @@
+git --version
+git config --global user.name "kpneha4"
+git config --global user.email "kpneha4@gmail.com"
+
+
+1. 
+
+# create project folder and enter it (only if you didn't open that folder in step 1)
+mkdir python-simple-app
+cd python-simple-app
+
+
+2.
+app.py
+
+@'
+def add(a, b):
+    return a + b
+
+if __name__ == "__main__":
+    print("Hello from Python app")
+    print("2 + 3 =", add(2, 3))
+'@ | Out-File -Encoding UTF8 app.py
+
+# create a test
+mkdir tests
+@'
+from app import add
+
+def test_add():
+    assert add(2, 3) == 5
+'@ | Out-File -Encoding UTF8 tests\test_app.py
+
+# create requirements
+@'pytest==8.3.2'@ | Out-File -Encoding UTF8 requirements.txt
+
+# create .gitignore
+@'
+__pycache__/
+.venv/
+.pytest_cache/
+*.pyc
+'@ | Out-File -Encoding UTF8 .gitignore
+
+
+
+3. 
+
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install --upgrade pip
+pip install -r requirements.txt
+
+[check - python --version, pip list]
+
+
+4.
+
+python app.py
+pytest -q
+
+
+5. 
+git init
+git add .
+git commit -m "Initial commit: add app, tests, requirements"
+
+
+6.
+
+git repository - python-simple-app
+
+copy - remote url
+
+7.
+
+git remote add origin https://github.com/kpneha4/python-simple-app.git
+git branch -M main
+git push -u origin main
+
+
+
+8. 
+
+Workflows
+
+file ---  .github/workflows/python.yml
+
+
+name: CI
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: python-version: "3.11"
+      - run: python -m pip install --upgrade pip
+      - run: pip install -r requirements.txt
+      - run: pytest -q
+
+
+
+9.
+
+Commit and push:
+
+git add .github/workflows/python.yml
+git commit -m "Add GitHub Actions CI workflow"
+git push
+
+
+
+GitHub ---> Actions
