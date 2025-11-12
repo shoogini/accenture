@@ -73,7 +73,7 @@ EXP 4:
 mkdir jenkins-static-site   
 cd jenkins-static-site 
 
-docker-compose.yml
+create docker-compose.yml
 
 version: '3.8'
 
